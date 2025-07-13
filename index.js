@@ -1,5 +1,5 @@
 // server.js
-
+require("dotenv").config();
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
@@ -15,11 +15,13 @@ const io = new Server(server, {
 const LOCATION_POSTED = "location-posted";
 const LOCATION_UPDATED = "location-updated";
 
+app.set("view engine", "ejs");
 // Serve a basic message at root
 app.get("/", (req, res) => {
-  res.send("Socket.IO server is running!");
+  res.render("index", {
+    apiKey: process.env.GOOGLE_API_KEY,
+  });
 });
-
 // Handle socket connections
 io.on("connection", (socket) => {
   console.log("A user connected:", socket.id);
@@ -29,7 +31,6 @@ io.on("connection", (socket) => {
     // Broadcast the message to all other clients
     socket.broadcast.emit(LOCATION_UPDATED, locationPayload);
   });
-
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
   });

@@ -16,6 +16,7 @@ const LOCATION_POSTED = "location-posted";
 const LOCATION_UPDATED = "location-updated";
 
 app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, 'views'));
 // Serve a basic message at root
 app.get("/", (req, res) => {
   res.render("index", {

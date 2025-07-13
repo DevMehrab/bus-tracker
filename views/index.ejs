@@ -111,7 +111,7 @@
       const LOCATION_POSTED = "location-posted";
       const LOCATION_UPDATED = "location-updated";
 
-      const socket = io("http://localhost:3000"); // Adjust if needed
+      const socket = io(); // Adjust if needed
 
       let deviceId = localStorage.getItem("deviceId");
       const deviceIdSpan = document.getElementById("deviceId");
